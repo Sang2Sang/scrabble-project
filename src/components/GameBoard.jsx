@@ -1,6 +1,8 @@
 import React from "react";
 import Tile from "./Tile";
 
+// It receives a board prop which is an array of letters, and onTileClick handles when a tile is clicked.
+
 function GameBoard(props) {
   const { board, onTileClick } = props;
 
