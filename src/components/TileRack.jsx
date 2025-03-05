@@ -6,24 +6,31 @@ function TileRack({ playerTiles, onTileDrop }) {
 
   function shuffleTiles() {
     const shuffled = [...shuffledTiles];
+    debugger; // tiles before shuffling
     for(let i = shuffled.length-1; i>0; i--){
       const j = Math.floor(Math.random() * (i + 1));
       [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
     }
+    debugger; // tiles before shuffling
     setShuffledTiles(shuffled);
   };
+
+
 function handleTileDrag(event, tile) {
+  debugger; // the tile that is dragged
   event.dataTransfer.setData("tile", JSON.stringify(tile));
 };
 
 const handleDrop = (e) => {
   e.preventDefault();
   const tileData = JSON.parse(e.dataTransfer.getData("tile"));
+  debugger; // check the tile data
   onTileDrop(tileData);
 };
 
 const handleDragOver = (e) => {
   e.preventDefault();
+  debugger;
 };
 
 
@@ -35,7 +42,9 @@ const handleDragOver = (e) => {
    >
   <button className='shuffle-btn' onClick={shuffleTiles}>Shuffle Tiles</button>
   {
-    shuffledTiles.map((tile, index) => (
+    shuffledTiles.map((tile, index) => {
+      debugger;
+      return(
       <div
       key={index}
       className='tile'
@@ -45,7 +54,9 @@ const handleDragOver = (e) => {
 
     <Tile letter={tile.letter} value={tile.value}/>
      </div>
-    ))}
+    );
+  })
+  }
    </div>
   );
 };
