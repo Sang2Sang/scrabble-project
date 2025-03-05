@@ -16,9 +16,23 @@ function handleTileDrag(event, tile) {
   event.dataTransfer.setData("tile", JSON.stringify(tile));
 };
 
+const handleDrop = (e) => {
+  e.preventDefault();
+  const tileData = JSON.parse(e.dataTransfer.getData("tile"));
+  onTileDrop(tileData);
+};
+
+const handleDragOver = (e) => {
+  e.preventDefault();
+};
+
 
   return(
-   <div className='title-rack'>
+   <div
+   className='title-rack'
+   onDrop={handleDrop}
+   onDragOver={handleDragOver}
+   >
   <button className='shuffle-btn' onClick={shuffleTiles}>Shuffle Tiles</button>
   {
     shuffledTiles.map((tile, index) => (
