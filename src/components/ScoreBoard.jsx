@@ -7,6 +7,7 @@
 import React from "react";
 
 function ScoreBoard(){
+    
     return (
         <div className="scoreboard">
             <h2>ScoreBoard</h2>
