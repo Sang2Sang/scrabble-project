@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import "./title.css";
 
 function Tile({letter, value, isSelected, onClick}) {
@@ -11,3 +12,10 @@ function Tile({letter, value, isSelected, onClick}) {
 };
 
 export default Tile; 
+=======
+function Tile(){
+
+}
+
+export default Tile;
+>>>>>>> 8ebc50b55ec1701baedc0c8982c2dddcc25b5ca3
