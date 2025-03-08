@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import GameBoard from "./components/GameBoard";
 import ScoreBoard from "./components/ScoreBoard"; 
@@ -12,7 +13,7 @@ function App(){
         {name: "Player 2", score: 0},
     ])
 
-    const [currentPlayerindex, setCurrentPlayerIndex]= useState[0];
+    const [currentPlayerIndex, setCurrentPlayerIndex]= useState[0];
 
     function updateScore(playerIndex,points){
         setPlayers(function(prevPlayers){
@@ -33,7 +34,7 @@ function App(){
     return(
         <div className="app">
             <h1>Scrabble Game</h1>
-           <ScoreBoard players={players} currentPlayerindex={currentPlayerindex}/>
+           <ScoreBoard players={players} currentPlayerIndex={currentPlayerIndex}/>
            <GameBoard />
            <TileRack />
            <PlayerComponent />
