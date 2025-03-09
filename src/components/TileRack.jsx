@@ -1,64 +1,34 @@
-import React, { useState } from 'react';
-import Tile from './Tile';
+import React from 'react'
+import Tile from './Tile'
+import { useGame } from '../GameLogic'
 
-function TileRack({ playerTiles, onTileDrop }) {
-  const [shuffledTiles, setShuffledTiles] = useState(playerTiles);
+export default function TileRack() {
+  const { state, dispatch } = useGame()
+  const currentPlayer = state.players[state.currentPlayer]
 
-  function shuffleTiles() {
-    const shuffled = [...shuffledTiles];
-    debugger; // tiles before shuffling
-    for(let i = shuffled.length-1; i>0; i--){
-      const j = Math.floor(Math.random() * (i + 1));
-      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  const shuffleTiles = () => {
+    const shuffled = [...currentPlayer.tiles]
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1))
+      ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
     }
-    debugger; // tiles before shuffling
-    setShuffledTiles(shuffled);
-  };
-
-
-function handleTileDrag(event, tile) {
-  debugger; // the tile that is dragged
-  event.dataTransfer.setData("tile", JSON.stringify(tile));
-};
-
-const handleDrop = (e) => {
-  e.preventDefault();
-  const tileData = JSON.parse(e.dataTransfer.getData("tile"));
-  debugger; // check the tile data
-  onTileDrop(tileData);
-};
-
-const handleDragOver = (e) => {
-  e.preventDefault();
-  debugger;
-};
-
-
-  return(
-   <div
-   className='title-rack'
-   onDrop={handleDrop}
-   onDragOver={handleDragOver}
-   >
-  <button className='shuffle-btn' onClick={shuffleTiles}>Shuffle Tiles</button>
-  {
-    shuffledTiles.map((tile, index) => {
-      debugger;
-      return(
-      <div
-      key={index}
-      className='tile'
-      draggable
-      onDragStart={(e) => handleTileDrag(e, tile)}
-     >
-
-    <Tile letter={tile.letter} value={tile.value}/>
-     </div>
-    );
-  })
+    dispatch({ type: 'SHUFFLE_TILES', shuffledTiles: shuffled })
   }
-   </div>
-  );
-};
 
-export default TileRack;
+  return (
+    <div className="tile-rack">
+      <button onClick={shuffleTiles}>Shuffle Tiles</button>
+      <div className="tiles-container">
+        {currentPlayer.tiles.map((tile, index) => (
+          <div
+            key={index}
+            className="tile-wrapper"
+            onClick={() => dispatch({ type: 'SELECT_TILE', tile })}
+          >
+            <Tile letter={tile.letter} value={tile.value} />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
