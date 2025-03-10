@@ -1,19 +1,17 @@
-// This component keeps track of each player scores, it will useState to update 
-// the scores and also to keep track of the player turns to avoid updating the 
-// wrong player score
-//Will need player info as props and also playerindex(check whose turn)
+import React from 'react';
+import { useGame } from '../GameLogic';
 
-import React from "react";
+export default function ScoreBoard() {
+  const { state } = useGame();
 
-function ScoreBoard(){
-    return (
-        <div className="scoreboard">
-            <h2>ScoreBoard</h2>
-            <div className="player-list">
-
-            </div>
-
+  return (
+    <div className="score-board">
+      {state.players.map(player => (
+        <div key={player.id} className="player-score">
+          <h3>{player.name}</h3>
+          <p>Score: {player.score}</p>
         </div>
-    );
+      ))}
+    </div>
+  );
 }
-export default ScoreBoard;

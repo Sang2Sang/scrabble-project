@@ -1,28 +1,38 @@
-import React from "react";
-import Tile from "./Tile";
+import React from 'react';
+import Tile from './Tile';
+import { useGame } from '../GameLogic';
 
-// It receives a board prop which is an array of letters, and onTileClick handles when a tile is clicked.
+export default function GameBoard() {
+  const { state, dispatch } = useGame();
 
-function GameBoard(props) {
-  const { board, onTileClick } = props;
+  const handleTilePlace = (row, col) => {
+    if (state.selectedTile) {
+      dispatch({
+        type: 'PLACE_TILE',
+        row,
+        col,
+        tile: state.selectedTile
+      });
+      // Move to the next turn.
+      dispatch({ type: 'NEXT_TURN' });
+    }
+  };
 
   return (
-    <div className="board">
-      {board.map(function (row, rowIndex) {
-        return row.map(function (letter, colIndex) {
-          return (
-            <Tile
-              key={`${rowIndex}-${colIndex}`}
-              letter={letter}
-              onClick={function () {
-                onTileClick(rowIndex, colIndex);
-              }}
-            />
-          );
-        });
-      })}
+    <div className="game-board">
+      {state.board.map((row, rowIndex) => (
+        <div key={rowIndex} className="board-row">
+          {row.map((tile, colIndex) => (
+            <div
+              key={colIndex}
+              className="board-cell"
+              onClick={() => handleTilePlace(rowIndex, colIndex)}
+            >
+              {tile && <Tile letter={tile.letter} value={tile.value} />}
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   );
 }
-
-export default GameBoard;
