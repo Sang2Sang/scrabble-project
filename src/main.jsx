@@ -1,14 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import { GameProvider } from './GameLogic'
-import './tile.css'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import { GameProvider } from './GameLogic';
+import './tile.css';
 
-const root = ReactDOM.createRoot(document.getElementById('root'))
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <GameProvider>
       <App />
     </GameProvider>
   </React.StrictMode>
-)
+);

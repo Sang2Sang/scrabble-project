@@ -1,9 +1,9 @@
-import React from 'react'
-import Tile from './Tile'
-import { useGame } from '../GameLogic'
+import React from 'react';
+import Tile from './Tile';
+import { useGame } from '../GameLogic';
 
 export default function GameBoard() {
-  const { state, dispatch } = useGame()
+  const { state, dispatch } = useGame();
 
   const handleTilePlace = (row, col) => {
     if (state.selectedTile) {
@@ -12,9 +12,11 @@ export default function GameBoard() {
         row,
         col,
         tile: state.selectedTile
-      })
+      });
+      // Move to the next turn.
+      dispatch({ type: 'NEXT_TURN' });
     }
-  }
+  };
 
   return (
     <div className="game-board">
@@ -32,5 +34,5 @@ export default function GameBoard() {
         </div>
       ))}
     </div>
-  )
+  );
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import "../tile.css";  // Correct path
+import "../tile.css";
 
 function Tile({ letter, value, isSelected, onClick }) {
   return (

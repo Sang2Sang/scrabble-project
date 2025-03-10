@@ -1,8 +1,8 @@
-import React from 'react'
-import { useGame } from '../GameLogic'
+import React from 'react';
+import { useGame } from '../GameLogic';
 
 export default function ScoreBoard() {
-  const { state } = useGame()
+  const { state } = useGame();
 
   return (
     <div className="score-board">
@@ -13,5 +13,5 @@ export default function ScoreBoard() {
         </div>
       ))}
     </div>
-  )
+  );
 }
